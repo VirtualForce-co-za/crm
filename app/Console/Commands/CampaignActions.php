@@ -35,7 +35,7 @@ class CampaignActions extends Command
             $campaigns = Campaigns::where('instanceid', $instanceid)->where(function ($query) {
                 $query->where('status', 'dialing')
                     ->orWhere('status', 'redialing');
-            });
+            })->get();
             if ($campaigns != null) {
                 foreach ($campaigns as $campaign) {
                     $cps = $campaign->instance->cps;
@@ -113,7 +113,7 @@ class CampaignActions extends Command
 
                                 DB::update("update leads set status=1  " . $callsid . ", updated_at=NOW() where id='" . $lead->id . "';");
                             } catch (\Exception $e) {
-                                DB::update("update leads set status=1, create_call_response='" . $e->getMessage() . "', updated_at=NOW() where id='" . $lead->id . "';");
+                                DB::update("update leads set status=1, dial_api_response='" . $e->getMessage() . "', updated_at=NOW() where id='" . $lead->id . "';");
                             }
                         }
                     } else {
