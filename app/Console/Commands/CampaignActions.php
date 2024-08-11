@@ -66,8 +66,9 @@ class CampaignActions extends Command
                                 } else {
                                     $cellno = $lead->cellno;
                                 }
-
+                                print("\n reaches here 1");
                                 $curl = curl_init();
+                                print("\n reaches here 2");
                                 curl_setopt_array(
                                     $curl,
                                     array(
@@ -94,11 +95,15 @@ class CampaignActions extends Command
                                         ),
                                     )
                                 );
+                                print("\n reaches here 3");
 
                                 $response_curl = curl_exec($curl);
+                                print("\n reaches here 4");
                                 $response = json_decode($response_curl);
+                                print("\n reaches here 5");
 
                                 curl_close($curl);
+                                echo "not reaching here.";
 
                                 if ($response->sid !== null) {
                                     $callsid = ", callsid='" . $response->sid . "'";
