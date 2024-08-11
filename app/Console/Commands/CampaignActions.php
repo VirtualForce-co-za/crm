@@ -36,7 +36,7 @@ class CampaignActions extends Command
                 $query->where('status', 'dialing')
                     ->orWhere('status', 'redialing');
             });
-            if ($campaigns->isNotEmpty()) {
+            if ($campaigns != null) {
                 foreach ($campaigns as $campaign) {
                     $cps = $campaign->instance->cps;
                     $accountsid = $campaign->instance->accountsid;
@@ -58,7 +58,7 @@ class CampaignActions extends Command
                             })
                             ->limit($cps)->get();
                     }
-                    if ($leads->isNotEmpty()) {
+                    if ($leads != null) {
                         foreach ($leads as $lead) {
                             try {
                                 if ($dialprefix === '27') {
