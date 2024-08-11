@@ -149,7 +149,7 @@ class CampaignsController extends Controller
                 ->where(function ($query) {
                     $query->where('status', 'dialing')
                         ->orWhere('status', 'redialing');
-                });
+                })->first();
             if ($campaign_runcheck->isEmpty() || $campaign_runcheck == null) {
                 $cmd = "php /var/www/crm/artisan campaign:action " . $campaign->instanceid;
                 $outputfile = '/var/www/crm/storage/output' . $campaign->instanceid;
