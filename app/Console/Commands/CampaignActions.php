@@ -71,7 +71,7 @@ class CampaignActions extends Command
                                 curl_setopt_array(
                                     $curl,
                                     array(
-                                        CURLOPT_URL => 'http://localhossdfdsf/api/v1/Accounts/' . $accountsid . '/Calls',
+                                        CURLOPT_URL => 'http://localhost/api/v1/Accounts/' . $accountsid . '/Calls',
                                         CURLOPT_RETURNTRANSFER => true,
                                         CURLOPT_ENCODING => '',
                                         CURLOPT_MAXREDIRS => 10,
