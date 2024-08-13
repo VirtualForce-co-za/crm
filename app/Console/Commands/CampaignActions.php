@@ -92,7 +92,7 @@ class CampaignActions extends Command
                                             'Content-Type: application/json'
                                         ),
                                     )
-                                ); 
+                                );
                                 $response_curl = curl_exec($curl);
                                 $response = json_decode($response_curl);
                                 curl_close($curl);
