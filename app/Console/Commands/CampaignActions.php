@@ -36,7 +36,7 @@ class CampaignActions extends Command
                 $query->where('status', 'dialing')
                     ->orWhere('status', 'redialing');
             })->get();
-            if ($campaigns != null) {
+            if ($campaigns->isNotEmpty()) {
                 foreach ($campaigns as $campaign) {
                     $cps = $campaign->instance->cps;
                     $accountsid = $campaign->instance->accountsid;
@@ -58,7 +58,7 @@ class CampaignActions extends Command
                             })
                             ->limit($cps)->get();
                     }
-                    if ($leads != null) {
+                    if ($leads->isNotEmpty()) {
                         foreach ($leads as $lead) {
                             try {
                                 if ($dialprefix === '27') {
@@ -66,9 +66,7 @@ class CampaignActions extends Command
                                 } else {
                                     $cellno = $lead->cellno;
                                 }
-                                print("\n reaches here 1");
                                 $curl = curl_init();
-                                print("\n reaches here 2");
                                 curl_setopt_array(
                                     $curl,
                                     array(
@@ -95,16 +93,10 @@ class CampaignActions extends Command
                                         ),
                                     )
                                 );
-                                print("\n reaches here 3");
-
                                 $response_curl = curl_exec($curl);
-                                print("\n reaches here 4");
                                 $response = json_decode($response_curl);
-                                print("\n reaches here 5");
-
                                 curl_close($curl);
-                                echo "not reaching here.";
-
+                                
                                 if ($response->sid !== null) {
                                     $callsid = ", callsid='" . $response->sid . "'";
                                 } else {
@@ -118,7 +110,6 @@ class CampaignActions extends Command
                         }
                     } else {
                         DB::update("update campaigns set status='Completed' where id=" . $campaign->id . ";");
-                        return 0;
                     }
                 }
             } else {
