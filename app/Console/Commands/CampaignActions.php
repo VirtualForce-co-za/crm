@@ -37,7 +37,7 @@ class CampaignActions extends Command
                     ->orWhere('status', 'redialing');
             })->get();
             //dd($campaigns->isNotEmpty());
-            return 0;
+            //return 0;
             if ($campaigns->isNotEmpty()) {
                 foreach ($campaigns as $campaign) {
                     $cps = $campaign->instance->cps;
