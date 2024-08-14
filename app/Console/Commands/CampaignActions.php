@@ -60,6 +60,7 @@ class CampaignActions extends Command
                             })
                             ->limit($cps)->get();
                     }
+                    var_dump($leads->isNotEmpty());
                     if ($leads->isNotEmpty()) {
                         foreach ($leads as $lead) {
                             try {
@@ -115,7 +116,6 @@ class CampaignActions extends Command
                     }
                 }
             } else {
-                var_dump("reaching on else.");
                 return 0;
             }
         }
