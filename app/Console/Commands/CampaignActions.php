@@ -36,8 +36,6 @@ class CampaignActions extends Command
                 $query->where('status', 'dialing')
                     ->orWhere('status', 'redialing');
             })->get();
-            //dd($campaigns->isNotEmpty());
-            //return 0;
             if ($campaigns->isNotEmpty()) {
                 foreach ($campaigns as $campaign) {
                     $cps = $campaign->instance->cps;
@@ -60,7 +58,6 @@ class CampaignActions extends Command
                             })
                             ->limit($cps)->get();
                     }
-                    var_dump($leads->isNotEmpty());
                     if ($leads->isNotEmpty()) {
                         foreach ($leads as $lead) {
                             try {
