@@ -36,7 +36,7 @@ class CampaignActions extends Command
                 $query->where('status', 'dialing')
                     ->orWhere('status', 'redialing');
             })->get();
-            dd($campaigns->isNotEmpty());
+            //dd($campaigns->isNotEmpty());
             return 0;
             if ($campaigns->isNotEmpty()) {
                 foreach ($campaigns as $campaign) {
@@ -115,6 +115,7 @@ class CampaignActions extends Command
                     }
                 }
             } else {
+                var_dump("reaching on else.");
                 return 0;
             }
         }
