@@ -137,6 +137,12 @@
                             <x-dropdown-link href="{{ route('instances') }}">
                                 {{ __('Instances') }}
                             </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('adddisposition') }}">
+                                {{ __('Add Disposition') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('dispositions') }}">
+                                {{ __('Dispositions') }}
+                            </x-dropdown-link>
                             <x-dropdown-link href="{{ route('adduser') }}">
                                 {{ __('Add User') }}
                             </x-dropdown-link>
@@ -225,6 +231,12 @@
                             </x-responsive-nav-link>
                             <x-responsive-nav-link href="{{ route('instances') }}" :active="request()->routeIs('instances')">
                                 {{ __('Instances') }}
+                            </x-responsive-nav-link>
+                            <x-responsive-nav-link href="{{ route('adddisposition') }}" :active="request()->routeIs('adddisposition')">
+                                {{ __('Add Disposition') }}
+                            </x-responsive-nav-link>
+                            <x-responsive-nav-link href="{{ route('dispositions') }}" :active="request()->routeIs('dispositions')">
+                                {{ __('Dispositions') }}
                             </x-responsive-nav-link>
                             <x-responsive-nav-link href="{{ route('adduser') }}" :active="request()->routeIs('adduser')">
                                 {{ __('Add User') }}

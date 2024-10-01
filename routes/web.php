@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AgentsController;
 use App\Http\Controllers\AgentResponsesController;
 use App\Http\Controllers\CampaignsController;
+use App\Http\Controllers\DispositionsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,21 +21,17 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     
-    Route::get('addinstance', function () {
-        return view('instance/addinstance');
-    })->name('addinstance');
+    Route::get('addinstance', function () {return view('instance/addinstance');})->name('addinstance');
+    Route::post('/addinstancesubmit', [InstancesController::class, 'addinstancesubmit'])->name('addinstancesubmit');
+    Route::get('/editinstance', [InstancesController::class, 'editinstance'])->name('editinstance');
+    Route::post('/editinstancesubmit', [InstancesController::class, 'editinstancesubmit'])->name('editinstancesubmit');
+    Route::get('/instances', [InstancesController::class, 'instances'])->name('instances');
 
-    Route::post('/addinstancesubmit', [InstancesController::class, 
-    'addinstancesubmit'])->name('addinstancesubmit');
-
-    Route::get('/editinstance', [InstancesController::class, 
-    'editinstance'])->name('editinstance');
-
-    Route::post('/editinstancesubmit', [InstancesController::class, 
-    'editinstancesubmit'])->name('editinstancesubmit');
-
-    Route::get('/instances', [InstancesController::class, 
-    'instances'])->name('instances');
+    Route::get('adddisposition', function () {return view('disposition/adddisposition');})->name('adddisposition');
+    Route::post('/adddispositionsubmit', [DispositionsController::class, 'adddispositionsubmit'])->name('adddispositionsubmit');
+    Route::get('/editdisposition', [DispositionsController::class, 'editdisposition'])->name('editdisposition');
+    Route::post('/editdispositionsubmit', [DispositionsController::class, 'editdispositionsubmit'])->name('editdispositionsubmit');
+    Route::get('/dispositions', [DispositionsController::class, 'dispositions'])->name('dispositions');
 
     Route::get('/users', [UsersController::class, 
     'users'])->name('users');

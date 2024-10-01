@@ -43,7 +43,7 @@ class CampaignActions extends Command
                     $applicationsid = $campaign->instance->applicationsid;
                     $bearer = $campaign->instance->bearer;
                     $dialprefix = $campaign->instance->dialprefix;
-                    $scripturl = $campaign->agent->location;
+                    $agent = $campaign->agent->location;
                     $cli = $campaign->cli;
                     if ($campaign->status == 'dialing') {
                         $leads = Leads::where('status', 0)
@@ -80,7 +80,7 @@ class CampaignActions extends Command
                                         CURLOPT_CUSTOMREQUEST => 'POST',
                                         CURLOPT_POSTFIELDS => '{
                                                             "application_sid": "' . $applicationsid . '",
-                                                            "scripturl": "' . $scripturl . '",
+                                                            "agent": "' . $agent . '",
                                                             "from": "' . $cli . '",
                                                             "to": {
                                                                     "type": "phone",
