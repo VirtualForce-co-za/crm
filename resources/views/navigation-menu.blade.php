@@ -130,25 +130,28 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
-                            @if (Auth::id() == 1)
+                            @if (Auth::id() == 1 || Auth::user()->whitelabel == 1)
                             <x-dropdown-link href="{{ route('addinstance') }}">
                                 {{ __('Add Instance') }}
                             </x-dropdown-link>
                             <x-dropdown-link href="{{ route('instances') }}">
                                 {{ __('Instances') }}
                             </x-dropdown-link>
+                            @if (Auth::id() == 1)
                             <x-dropdown-link href="{{ route('adddisposition') }}">
                                 {{ __('Add Disposition') }}
                             </x-dropdown-link>
                             <x-dropdown-link href="{{ route('dispositions') }}">
                                 {{ __('Dispositions') }}
                             </x-dropdown-link>
+                            @endif
                             <x-dropdown-link href="{{ route('adduser') }}">
                                 {{ __('Add User') }}
                             </x-dropdown-link>
                             <x-dropdown-link href="{{ route('users') }}">
                                 {{ __('users') }}
                             </x-dropdown-link>
+                            @if (Auth::id() == 1)
                             <x-dropdown-link href="{{ route('addagent') }}">
                                 {{ __('Add Agent') }}
                             </x-dropdown-link>
@@ -158,6 +161,7 @@
                             <x-dropdown-link href="{{ route('agentresponses') }}">
                                 {{ __('Agent Responses') }}
                             </x-dropdown-link>
+                            @endif
                             @endif
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -225,28 +229,38 @@
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
-                @if (Auth::id() == 1)
+                @if (Auth::id() == 1 || Auth::user()->whitelabel == 1)
                             <x-responsive-nav-link href="{{ route('addinstance') }}" :active="request()->routeIs('addinstance')">
                                 {{ __('Add Instance') }}
                             </x-responsive-nav-link>
                             <x-responsive-nav-link href="{{ route('instances') }}" :active="request()->routeIs('instances')">
                                 {{ __('Instances') }}
                             </x-responsive-nav-link>
+                            @if (Auth::id() == 1)
                             <x-responsive-nav-link href="{{ route('adddisposition') }}" :active="request()->routeIs('adddisposition')">
                                 {{ __('Add Disposition') }}
                             </x-responsive-nav-link>
                             <x-responsive-nav-link href="{{ route('dispositions') }}" :active="request()->routeIs('dispositions')">
                                 {{ __('Dispositions') }}
                             </x-responsive-nav-link>
+                            @endif
                             <x-responsive-nav-link href="{{ route('adduser') }}" :active="request()->routeIs('adduser')">
                                 {{ __('Add User') }}
                             </x-responsive-nav-link>
                             <x-responsive-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
                                 {{ __('users') }}
                             </x-responsive-nav-link>
+                            @if (Auth::id() == 1)
                             <x-responsive-nav-link href="{{ route('addagent') }}" :active="request()->routeIs('addagent')">
                                 {{ __('Add Agent') }}
                             </x-responsive-nav-link>
+                            <x-responsive-nav-link href="{{ route('addagentresponse') }}" :active="request()->routeIs('addagentresponse')">
+                                {{ __('Add Agent Response') }}
+                            </x-responsive-nav-link>
+                            <x-responsive-nav-link href="{{ route('agentresponses') }}" :active="request()->routeIs('agentresponses')">
+                                {{ __('Agent Responses') }}
+                            </x-responsive-nav-link>
+                            @endif
                             @endif
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

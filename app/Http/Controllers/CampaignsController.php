@@ -21,6 +21,9 @@ class CampaignsController extends Controller
     {
         if (auth::id() == 1) {
             $campaigns = Campaigns::paginate(25);
+        } elseif (Auth::user()->whitelabel == 1) {
+            $campaigns = Campaigns::where('instanceid', Auth::user()->instanceid)
+                        ->orWhere('whitelabeluserid', auth::id())->paginate(25);
         } else {
             $campaigns = Campaigns::where('instanceid', Auth::user()->instanceid)->paginate(25);
         }
@@ -34,10 +37,18 @@ class CampaignsController extends Controller
             $instances = Instances::all();
             $agents = Agents::all();
             return view('campaign/addcampaign', compact('instances', 'agents'));
-        } else {
-            $instances = Instances::where('instanceid', Auth::user()->instanceid)->first();
-            $agents = Agents::where('instanceid', Auth::user()->instanceid);
+        }
+        elseif (Auth::user()->whitelabel == 1) {
+            $instances = Instances::where('whitelabeluserid', auth::id())
+                            ->orWhere('id', Auth::user()->instanceid)->get();
+            $agents = Agents::where('whitelabeluserid', auth::id())
+                            ->orWhere('instanceid', Auth::user()->instanceid)->get();
             return view('campaign/addcampaign', compact('instances', 'agents'));
+        } 
+        else {
+            $instance = Instances::where('id', Auth::user()->instanceid)->first();
+            $agents = Agents::where('instanceid', Auth::user()->instanceid)->get();
+            return view('campaign/addcampaign', compact('instance', 'agents'));
         }
     }
 
@@ -47,13 +58,25 @@ class CampaignsController extends Controller
             $campaignid = $request->input('id');
             $campaign = Campaigns::where('id', $campaignid)->first();
             $instances = Instances::all();
-            return view('campaign/editcampaign', compact('campaign', 'instances'));
-        } else {
+            $agents = Agents::all();
+            return view('campaign/editcampaign', compact('campaign', 'instances', 'agents'));
+        } 
+        elseif (Auth::user()->whitelabel == 1) {
+            $campaignid = $request->input('id');
+            $campaign = Campaigns::where('id', $campaignid)->first();
+            $instances = Instances::where('whitelabeluserid', auth::id())
+                                    ->orWhere('id', Auth::user()->instanceid)->get();
+            $agents = Agents::where('whitelabeluserid', auth::id())
+                            ->orWhere('instanceid', Auth::user()->instanceid)->get();
+            return view('campaign/editcampaign', compact('campaign', 'instances', 'agents'));
+        }
+        else {
             $campaignid = $request->input('id');
             $campaign = Campaigns::where('id', $campaignid)
                 ->where('instanceid', Auth::user()->instanceid)->first();
-            $instances = Instances::where('instanceid', Auth::user()->instanceid)->first();
-            return view('campaign/editcampaign', compact('campaign', 'instances'));
+            $instance = Instances::where('id', Auth::user()->instanceid)->first();
+            $agents = Agents::where('instanceid', Auth::user()->instanceid)->get();
+            return view('campaign/editcampaign', compact('campaign', 'instance', 'agents'));
         }
     }
 
@@ -65,7 +88,7 @@ class CampaignsController extends Controller
             $campaign->name = $request->input('name');
             $campaign->cli = $request->input('cli');
             $campaign->agentid = $request->input('agentid');
-            if (auth::id() == 1) {
+            if (auth::id() == 1 || Auth::user()->whitelabel == 1) {
                 $campaign->instanceid = $request->input('instanceid');
             } else {
                 $campaign->instanceid = Auth::user()->instanceid;

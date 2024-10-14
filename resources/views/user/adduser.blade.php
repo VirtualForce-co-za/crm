@@ -7,7 +7,7 @@
 
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Auth::id() == 1)
+            @if (Auth::id() == 1 || Auth::user()->whitelabel == 1)
 
                 <form id="addusersubmit" method="POST" action="/addusersubmit">
                     @csrf
@@ -41,7 +41,14 @@
                     </div>
 </br>
 
-
+@if (Auth::id() == 1)
+</br>
+<div class="col-span-6 sm:col-span-4">
+                        <x-label for="whitelabel" value="{{ __('White Label') }}" />
+                        <x-input id="whitelabel" name="whitelabel" type="checkbox" class="mt-1 block" value="1"  />
+                    </div>
+</br>
+@endif
 
                     <x-button type="submit">Save</x-button>
 

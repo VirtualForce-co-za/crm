@@ -20,7 +20,12 @@ class AgentsController extends Controller
     {
         if (auth::id() == 1) {
             $agents = Agents::paginate(25);
-        } else {
+        }
+        elseif (Auth::user()->whitelabel == 1) {
+            $agents = Agents::where('whitelabeluserid', auth::id())
+                      ->orWhere('instanceid', Auth::user()->instanceid)->paginate(25);
+        }
+        else {
             $agents = Agents::where('instanceid', Auth::user()->instanceid)->paginate(25);
         }
         return view('agent/agents', compact('agents'));
@@ -52,6 +57,8 @@ class AgentsController extends Controller
             $agent->name = $request->input('name');
             $agent->location = $request->input('location');
             $agent->instanceid = $request->input('instanceid');
+            $instance = Instances::where('id', $request->input('instanceid'))->first();
+            $agent->whitelabeluserid = $instance->whitelabeluserid;
             $agent->save();
             Session::flash('status', 'Agent Created Successfully!');
             return redirect('/agents');
@@ -65,9 +72,12 @@ class AgentsController extends Controller
             $name = $request->input('name');
             $location = $request->input('location');
             $instanceid = $request->input('instanceid');
+            $instance = Instances::where('id', $request->input('instanceid'))->first();
+            $whitelabeluserid = $instance->whitelabeluserid;
             DB::update("update agents set 
                         name='" . $name . "', location='" . $location . "',
                          instanceid=" . $instanceid . ", 
+                         whitelabeluserid=" . $whitelabeluserid . ", 
                         updated_at=NOW() where id=" . $agentid . ";");
             Session::flash('status', 'Agent Updated Successfully!');
             return redirect('/agents');

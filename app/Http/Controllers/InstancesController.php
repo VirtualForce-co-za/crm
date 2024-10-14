@@ -21,6 +21,10 @@ class InstancesController extends Controller
             $instances = Instances::paginate(25);
             return view('instance/instances', compact('instances'));
         }
+        elseif (Auth::user()->whitelabel == 1) {
+            $instances = Instances::where('whitelabeluserid', auth::id())->paginate(25);
+            return view('instance/instances', compact('instances'));
+        }
     }
 
     public function editinstance(Request $request)
@@ -28,6 +32,12 @@ class InstancesController extends Controller
         if (auth::id() == 1) {
             $instanceid = $request->input('id');
             $instance = Instances::where('id', $instanceid)->first();
+            return view('instance/editinstance', compact('instance'));
+        }
+        elseif (Auth::user()->whitelabel == 1) {
+            $instanceid = $request->input('id');
+            $instance = Instances::where('id', $instanceid)
+                        ->where('whitelabeluserid', auth::id())->first();
             return view('instance/editinstance', compact('instance'));
         }
     }
@@ -42,6 +52,15 @@ class InstancesController extends Controller
             $instance->bearer = $request->input('bearer');
             $instance->dialprefix = $request->input('dialprefix');
             $instance->cps = $request->input('cps');
+            $instance->whitelabeluserid = 1;
+            $instance->save();
+            Session::flash('status', 'Instance Created Successfully!');
+            return redirect('/instances');
+        }
+        elseif (Auth::user()->whitelabel == 1) {
+            $instance = new Instances();
+            $instance->name = $request->input('name');
+            $instance->whitelabeluserid = auth::id();
             $instance->save();
             Session::flash('status', 'Instance Created Successfully!');
             return redirect('/instances');
@@ -67,6 +86,18 @@ class InstancesController extends Controller
                         dialprefix='" . $dialprefix . "', 
                         cps=" . $cps . ", 
                         updated_at=NOW() where id=" . $instanceid . ";");
+
+            Session::flash('status', 'Instance Updated Successfully!');
+            return redirect('/instances');
+        }
+        elseif (Auth::user()->whitelabel == 1) {
+            $instanceid = $request->input('instanceid');
+            $instancename = $request->input('name');
+            
+            DB::update("update instances set 
+                        name='" . $instancename . "', 
+                        updated_at=NOW() where id=" . $instanceid . "
+                         and whitelabeluserid=".auth::id().";");
 
             Session::flash('status', 'Instance Updated Successfully!');
             return redirect('/instances');

@@ -15,9 +15,11 @@
                                                         <td><strong>name</strong></td>                                                        
                                                         <td><strong>created at</strong></td>
                                                         <td><strong>updated at</strong></td>
+                                                        @if (Auth::id() == 1 || Auth::user()->whitelabel == 1)
+                                                        <td><strong>instance</strong></td>
+                                                        @endif
                                                         @if (Auth::id() == 1)
                                                         <td><strong>location</strong></td>
-                                                        <td><strong>instance</strong></td>
                                                         <td><strong>edit</strong></td>
                                                         @endif
                                                     </tr>
@@ -28,9 +30,11 @@
                                                         <td>{{$agent->name}}</td>                                                        
                                                         <td>{{$agent->created_at}}</td>
                                                         <td>{{$agent->updated_at}}</td>
+                                                        @if (Auth::id() == 1 || Auth::user()->whitelabel == 1)
+                                                        <td>{{$agent->instance->name}}</td>
+                                                        @endif
                                                         @if (Auth::id() == 1)
                                                         <td>{{$agent->location}}</td>
-                                                        <td>{{$agent->instance->name}}</td>
                                                         <td><button type="button"  onclick="location.href='/editagent?id={{$agent->id}}'">Edit</button></td>
                                                         @endif
                                                     </tr>

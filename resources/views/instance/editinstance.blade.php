@@ -7,7 +7,7 @@
 
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Auth::id() == 1)
+            @if (Auth::id() == 1 || Auth::user()->whitelabel == 1)
 
                 <form id="editinstancesubmit" method="POST" action="/editinstancesubmit">
                     @csrf
@@ -17,6 +17,7 @@
                         <x-input-error for="name" class="mt-2" />
                     </div>
                     </br>
+                    @if (Auth::id() == 1)
                     <div class="col-span-6 sm:col-span-4">
                         <x-label for="accountsid" value="{{ __('Account SID') }}" />
                         <x-input id="accountsid" name="accountsid" type="text" class="mt-1 block w-full" value="{{$instance->accountsid}}" required />
@@ -46,6 +47,7 @@
                         <x-input id="cps" name="cps" type="text" class="mt-1 block w-full" value="{{$instance->cps}}" required />
                         <x-input-error for="cps" class="mt-2" />
                     </div>
+                    @endif
                     </br>
                     <x-input id="instanceid" name="instanceid" type="hidden" value="{{$instance->id}}" />
                     <x-button type="submit">Save</x-button>

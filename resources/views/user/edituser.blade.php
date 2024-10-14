@@ -7,7 +7,7 @@
 
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Auth::id() == 1)
+            @if (Auth::id() == 1 || Auth::user()->whitelabel == 1)
 
                 <form id="editusersubmit" method="POST" action="/editusersubmit">
                     @csrf
@@ -25,7 +25,7 @@
                     </br>
 <div class="col-span-6 sm:col-span-4">
                         <x-label for="password" value="{{ __('Password') }}" />
-                        <x-input id="password" name="password" type="text" class="mt-1 block w-full"  required />
+                        <x-input id="password" name="password" type="text" class="mt-1 block w-full" />
                         <x-input-error for="password" class="mt-2" />
                     </div>
 </br>
@@ -45,6 +45,18 @@
                     </div>
 </br>
 
+@if (Auth::id() == 1)
+</br>
+<div class="col-span-6 sm:col-span-4">
+                        <x-label for="whitelabel" value="{{ __('White Label') }}" />
+                        <input id="whitelabel" name="whitelabel" type="checkbox" class="mt-1 block" value="1" 
+                        @if ($user->whitelabel == 1)
+                             checked
+                        @endif 
+                        />
+                    </div>
+</br>
+@endif
 
                     <x-input id="userid" name="userid" type="hidden" value="{{$user->id}}" />
                     <x-button type="submit">Save</x-button>
