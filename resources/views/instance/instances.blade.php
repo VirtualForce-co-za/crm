@@ -14,6 +14,7 @@
                                                         <td><strong>id</strong></td>
                                                         <td><strong>name</strong></td>
                                                         <td><strong>whitelabeluserid</strong></td>
+                                                        <td><strong>own trunk</strong></td>
                                                         <td><strong>created at</strong></td>
                                                         <td><strong>updated at</strong></td>
                                                         <td><strong>edit</strong></td>
@@ -24,6 +25,7 @@
                                                         <td>{{$instance->id}}</td>
                                                         <td>{{$instance->name}}</td>
                                                         <td>{{$instance->whitelabeluserid}}</td>
+                                                        <td>{{$instance->owntrunk}}</td>
                                                         <td>{{$instance->created_at}}</td>
                                                         <td>{{$instance->updated_at}}</td>
                                                         <td><button type="button"  onclick="location.href='/editinstance?id={{$instance->id}}'">Edit</button></td>

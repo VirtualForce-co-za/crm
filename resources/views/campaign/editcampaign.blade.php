@@ -23,7 +23,9 @@
                         <x-input-error for="cli" class="mt-2" />
                     </div>
 </br>
-
+@if(isset($instance))
+<x-input id="instanceid" name="instanceid" type="hidden" value="{{$instance->id}}" />
+@endif
 @if(isset($instances))
 <div class="col-span-6 sm:col-span-4">
                         <x-label for="instance" value="{{ __('Instance') }}" />
@@ -39,9 +41,7 @@
                                     </select>
                     </div>
 @endif
-@if(isset($instance))
-<x-input id="instanceid" name="instanceid" type="hidden" value="{{$instance->id}}" />
-@endif
+
 </br>
 
 

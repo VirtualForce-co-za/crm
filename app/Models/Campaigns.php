@@ -17,4 +17,8 @@ class Campaigns extends Model
     {
         return $this->belongsTo(Instances::class, 'instanceid', 'id');
     }
+    public function whitelabelinstance()
+    {
+        return $this->belongsTo(Instances::class, 'whitelabelinstanceid', 'id');
+    }
 }

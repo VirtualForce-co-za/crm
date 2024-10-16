@@ -17,6 +17,15 @@
                         <x-input-error for="name" class="mt-2" />
                     </div>
                     </br>
+                    <div class="col-span-6 sm:col-span-4">
+                        <x-label for="owntrunk" value="{{ __('owntrunk') }}" />
+                        <input id="owntrunk" name="owntrunk" type="checkbox" class="mt-1 block" value="1" 
+                        @if ($user->owntrunk == 1)
+                             checked
+                        @endif 
+                        />
+                    </div>
+                    </br>
                     @if (Auth::id() == 1)
                     <div class="col-span-6 sm:col-span-4">
                         <x-label for="accountsid" value="{{ __('Account SID') }}" />

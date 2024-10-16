@@ -93,6 +93,7 @@ class CampaignsController extends Controller
             } else {
                 $campaign->instanceid = Auth::user()->instanceid;
             }
+            $campaign->whitelabelinstanceid = Auth::user()->whitelabelinstanceid;
             $campaign->status = "file uploading";
             $campaign->save();
 
@@ -123,14 +124,17 @@ class CampaignsController extends Controller
 
     public function editcampaignsubmit(Request $request)
     {
+        $campaign->whitelabelinstanceid = Auth::user()->whitelabelinstanceid;
         if (auth::id() == 1) {
             $campaignid = $request->input('campaignid');
             $name = $request->input('name');
             $cli = $request->input('cli');
             $agentid = $request->input('agentid');
             $instanceid = $request->input('instanceid');
+            $whitelabelinstanceid = 1;
             DB::update("update campaigns set 
-                        name='" . $name . "', cli='" . $cli . "', agentid=" . $agentid . ", instanceid=" . $instanceid . ", 
+                        name='" . $name . "', cli='" . $cli . "', agentid=" . $agentid . ", 
+                        instanceid=" . $instanceid . ", whitelabelinstanceid=" . $whitelabelinstanceid . ", 
                         updated_at=NOW() where id=" . $campaignid . ";");
             Session::flash('status', 'Campaign Updated Successfully!');
             return redirect('/campaigns');
@@ -140,8 +144,9 @@ class CampaignsController extends Controller
             $cli = $request->input('cli');
             $agentid = $request->input('agentid');
             $instanceid = Auth::user()->instanceid;
+            $whitelabelinstanceid = Auth::user()->whitelabelinstanceid;
             DB::update("update campaigns set 
-                        name='" . $name . "', cli='" . $cli . "', agentid=" . $agentid . ", 
+                        name='" . $name . "', cli='" . $cli . "', agentid=" . $agentid . ", whitelabelinstanceid=" . $whitelabelinstanceid . ", 
                         updated_at=NOW() where id=" . $campaignid . " and instanceid=" . $instanceid . ";");
             Session::flash('status', 'Campaign Updated Successfully!');
             return redirect('/campaigns');

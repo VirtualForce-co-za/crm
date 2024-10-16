@@ -38,11 +38,20 @@ class CampaignActions extends Command
             })->get();
             if ($campaigns->isNotEmpty()) {
                 foreach ($campaigns as $campaign) {
-                    $cps = $campaign->instance->cps;
-                    $accountsid = $campaign->instance->accountsid;
-                    $applicationsid = $campaign->instance->applicationsid;
-                    $bearer = $campaign->instance->bearer;
-                    $dialprefix = $campaign->instance->dialprefix;
+                    if ($campaign->instance->owntrunk == 1) {
+                        $cps = $campaign->instance->cps;
+                        $accountsid = $campaign->instance->accountsid;
+                        $applicationsid = $campaign->instance->applicationsid;
+                        $bearer = $campaign->instance->bearer;
+                        $dialprefix = $campaign->instance->dialprefix;
+                    } else {
+                        $cps = $campaign->whitelabelinstance->cps;
+                        $accountsid = $campaign->whitelabelinstance->accountsid;
+                        $applicationsid = $campaign->whitelabelinstance->applicationsid;
+                        $bearer = $campaign->whitelabelinstance->bearer;
+                        $dialprefix = $campaign->whitelabelinstance->dialprefix;
+                    }
+                    
                     $agent = $campaign->agent->location;
                     $cli = $campaign->cli;
                     if ($campaign->status == 'dialing') {
@@ -96,7 +105,7 @@ class CampaignActions extends Command
                                 $response_curl = curl_exec($curl);
                                 $response = json_decode($response_curl);
                                 curl_close($curl);
-                                
+
                                 if ($response->sid !== null) {
                                     $callsid = ", callsid='" . $response->sid . "'";
                                 } else {

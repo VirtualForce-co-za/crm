@@ -53,6 +53,9 @@ class InstancesController extends Controller
             $instance->dialprefix = $request->input('dialprefix');
             $instance->cps = $request->input('cps');
             $instance->whitelabeluserid = 1;
+            if($request->input('owntrunk') == "1"){
+                $instance->owntrunk = 1;
+            }            
             $instance->save();
             Session::flash('status', 'Instance Created Successfully!');
             return redirect('/instances');
@@ -61,6 +64,12 @@ class InstancesController extends Controller
             $instance = new Instances();
             $instance->name = $request->input('name');
             $instance->whitelabeluserid = auth::id();
+            if($request->input('owntrunk') == "1"){
+                $instance->owntrunk = 1;
+            }
+            else{
+                $instance->owntrunk = 0;
+            }
             $instance->save();
             Session::flash('status', 'Instance Created Successfully!');
             return redirect('/instances');
@@ -77,6 +86,12 @@ class InstancesController extends Controller
             $bearer = $request->input('bearer');
             $dialprefix = $request->input('dialprefix');
             $cps = $request->input('cps');
+            if($request->input('owntrunk') == "1"){
+                $owntrunk = 1;
+            }
+            else{
+                $owntrunk = 0;
+            }
 
             DB::update("update instances set 
                         name='" . $instancename . "', 
@@ -85,6 +100,7 @@ class InstancesController extends Controller
                         bearer='" . $bearer . "', 
                         dialprefix='" . $dialprefix . "', 
                         cps=" . $cps . ", 
+                        owntrunk=" . $owntrunk . ", 
                         updated_at=NOW() where id=" . $instanceid . ";");
 
             Session::flash('status', 'Instance Updated Successfully!');
@@ -93,9 +109,16 @@ class InstancesController extends Controller
         elseif (Auth::user()->whitelabel == 1) {
             $instanceid = $request->input('instanceid');
             $instancename = $request->input('name');
+            if($request->input('owntrunk') == "1"){
+                $owntrunk = 1;
+            }
+            else{
+                $owntrunk = 0;
+            }
             
             DB::update("update instances set 
                         name='" . $instancename . "', 
+                        owntrunk=" . $owntrunk . ", 
                         updated_at=NOW() where id=" . $instanceid . "
                          and whitelabeluserid=".auth::id().";");
 

@@ -68,8 +68,12 @@ class UsersController extends Controller
             if($request->input('whitelabel') == "1")
             {
                 $user->whitelabel = $request->input('whitelabel');
-            }            
-            $user->whitelabeluserid = 1;
+                $user->whitelabelinstanceid = $request->input('instanceid');
+            }
+            else{
+                $user->whitelabelinstanceid = 1;
+            }
+            $user->whitelabeluserid = 1;            
             $user->save();
             Session::flash('status', 'User Created Successfully!');
             return redirect('/users');
@@ -81,6 +85,7 @@ class UsersController extends Controller
             $user->instanceid = $request->input('instanceid');
             $user->password = Hash::make($request->input('password'));
             $user->whitelabeluserid = auth::id();
+            $user->whitelabelinstanceid = Auth::user()->instanceid;
             $user->save();
             Session::flash('status', 'User Created Successfully!');
             return redirect('/users');
@@ -96,6 +101,7 @@ class UsersController extends Controller
             $name = $request->input('name');
             $email = $request->input('email');
             $whitelabel = 0;
+            $whitelabelinstanceid = 0;
             if($request->input('password') != ""){
                 $password = ", password='" . Hash::make($request->input('password')) . "'";
             }
@@ -103,12 +109,18 @@ class UsersController extends Controller
             if($request->input('whitelabel') == "1")
             {
                 $whitelabel = 1;
-            }            
+                $user->whitelabelinstanceid = $request->input('instanceid');
+            }       
+            else{
+                $user->whitelabelinstanceid = 1;
+            }
+
             DB::update("update users set name='" . $name . "'
             , email='" . $email . "'
             " . $password . "
             , instanceid='" . $instanceid . "'
             , whitelabel='" . $whitelabel . "'
+            , whitelabelinstanceid='" . $whitelabelinstanceid . "'
             , updated_at=NOW() where id=" . $userid . ";");
             Session::flash('status', 'User Updated Successfully!');
             return redirect('/users');
@@ -121,10 +133,12 @@ class UsersController extends Controller
             if($request->input('password') != ""){
                 $password = ", password='" . Hash::make($request->input('password')) . "'";
             }
+            $whitelabelinstanceid = Auth::user()->instanceid;
             DB::update("update users set name='" . $name . "'
             , email='" . $email . "'
             " . $password . "
             , instanceid='" . $instanceid . "'
+            , whitelabelinstanceid='" . $whitelabelinstanceid . "'
             , updated_at=NOW() where id=" . $userid . ";");
             Session::flash('status', 'User Updated Successfully!');
             return redirect('/users');
