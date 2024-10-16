@@ -109,10 +109,10 @@ class UsersController extends Controller
             if($request->input('whitelabel') == "1")
             {
                 $whitelabel = 1;
-                $user->whitelabelinstanceid = $request->input('instanceid');
+                $whitelabelinstanceid = $request->input('instanceid');
             }       
             else{
-                $user->whitelabelinstanceid = 1;
+                $whitelabelinstanceid = 1;
             }
 
             DB::update("update users set name='" . $name . "'
