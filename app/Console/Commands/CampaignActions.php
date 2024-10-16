@@ -75,9 +75,7 @@ class CampaignActions extends Command
                                 } else {
                                     $cellno = $lead->cellno;
                                 }
-                                print("\n reaches here 1");
                                 $curl = curl_init();
-                                print("\n reaches here 2");
                                 curl_setopt_array(
                                     $curl,
                                     array(
