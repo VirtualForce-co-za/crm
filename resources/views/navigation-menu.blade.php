@@ -7,9 +7,9 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                     @if(request()->getHttpHost() == "virtualagents.onemobile.cloud")
-                            <img class="h-12 w-auto text-white lg:h-16 lg:text-[#FF2D20]" viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg" src="virtualagents.onemobile.cloud.png"/>
+                            <img class="h-12 w-auto text-white lg:h-16 lg:text-[#FF2D20]" viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg" src="https://virtualagents.onemobile.cloud/virtualagents.onemobile.cloud.png"/>
                         @elseif(request()->getHttpHost() == "127.0.0.1:8000" || request()->getHttpHost() == "crm.virtualforce.co.za")
-                            <img class="h-12 w-auto text-white lg:h-16 lg:text-[#FF2D20]" viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg" src="crm.virtualforce.co.za.png"/>
+                            <img class="h-12 w-auto text-white lg:h-16 lg:text-[#FF2D20]" viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg" src="https://crm.virtualforce.co.za/crm.virtualforce.co.za.png"/>
                         @endif
                     </a>
                 </div>

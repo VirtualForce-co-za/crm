@@ -60,34 +60,10 @@
 
                     <main class="mt-6">
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
+                            
+
                             <a
                                 href="#"
-                                id="docs-card"
-                                class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
-                            >
-                                
-
-                                <div class="relative flex items-center gap-6 lg:items-end">
-                                    <div id="docs-card-content" class="flex items-start gap-6 lg:flex-col">
-                                        <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
-                                            <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="#FF2D20" d="M23 4a1 1 0 0 0-1.447-.894L12.224 7.77a.5.5 0 0 1-.448 0L2.447 3.106A1 1 0 0 0 1 4v13.382a1.99 1.99 0 0 0 1.105 1.79l9.448 4.728c.14.065.293.1.447.1.154-.005.306-.04.447-.105l9.453-4.724a1.99 1.99 0 0 0 1.1-1.789V4ZM3 6.023a.25.25 0 0 1 .362-.223l7.5 3.75a.251.251 0 0 1 .138.223v11.2a.25.25 0 0 1-.362.224l-7.5-3.75a.25.25 0 0 1-.138-.22V6.023Zm18 11.2a.25.25 0 0 1-.138.224l-7.5 3.75a.249.249 0 0 1-.329-.099.249.249 0 0 1-.033-.12V9.772a.251.251 0 0 1 .138-.224l7.5-3.75a.25.25 0 0 1 .362.224v11.2Z"/><path fill="#FF2D20" d="m3.55 1.893 8 4.048a1.008 1.008 0 0 0 .9 0l8-4.048a1 1 0 0 0-.9-1.785l-7.322 3.706a.506.506 0 0 1-.452 0L4.454.108a1 1 0 0 0-.9 1.785H3.55Z"/></svg>
-                                        </div>
-
-                                        <div class="pt-3 sm:pt-5 lg:pt-0">
-                                            <h2 class="text-xl font-semibold text-black dark:text-white">Model Based Agents</h2>
-
-                                            <p class="mt-4 text-sm/relaxed">
-                                            A model-based agent can handle partially observable environments. Its current state is stored inside the agent maintaining some kind of structure that describes the part of the world which cannot be seen. This knowledge about "how the world works" is called a model of the world, hence the name "model-based agent".
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <svg class="size-6 shrink-0 stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
-                                </div>
-                            </a>
-
-                            <a
-                                href="https://laracasts.com"
                                 class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
                             >
                                 <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
@@ -95,16 +71,48 @@
                                 </div>
 
                                 <div class="pt-3 sm:pt-5">
-                                    <h2 class="text-xl font-semibold text-black dark:text-white">Agent Function</h2>
+                                    <h2 class="text-xl font-semibold text-black dark:text-white">Artificial intelligence training models</h2>
 
                                     <p class="mt-4 text-sm/relaxed">
-                                    A simple agent program can be defined mathematically as a function f (called the "agent function")[20] which maps every possible percepts sequence to a possible action the agent can perform or to a coefficient, feedback element, function or constant that affects eventual actions:
+                                    When businesses talk about AI, they often talk about “training data.” But what does that mean? Remember that limited-memory artificial intelligence is AI that improves over time by being trained with new data. Machine learning is a subset of artificial intelligence that uses algorithms to train data to obtain results.
+<br><br>
+In broad strokes, three kinds of learnings models are often used in machine learning:
+<br><br>
+Supervised learning is a machine learning model that maps a specific input to an output using labeled training data (structured data). In simple terms, to train the algorithm to recognize pictures of cats, feed it pictures labeled as cats.
+<br><br>
+Unsupervised learning is a machine learning model that learns patterns based on unlabeled data (unstructured data). Unlike supervised learning, the end result is not known ahead of time. Rather, the algorithm learns from the data, categorizing it into groups based on attributes. For instance, unsupervised learning is good at pattern matching and descriptive modeling. 
+<br><br>
+In addition to supervised and unsupervised learning, a mixed approach called semi-supervised learning is often employed, where only some of the data is labeled. In semi-supervised learning, an end result is known, but the algorithm must figure out how to organize and structure the data to achieve the desired results.
+<br><br>
+Reinforcement learning is a machine learning model that can be broadly described as “learn by doing.” An “agent” learns to perform a defined task by trial and error (a feedback loop) until its performance is within a desirable range. The agent receives positive reinforcement when it performs the task well and negative reinforcement when it performs poorly. An example of reinforcement learning would be teaching a robotic hand to pick up a ball. 
 
-Agent function is an abstract concept as it could incorporate various principles of decision making like calculation of utility of individual options, deduction over logic rules, fuzzy logic, etc.[21]
-
-The program agent, instead, maps every possible percept to an action.[22]
-
-We use the term percept to refer to the agent's perceptional inputs at any given instant. In the following figures, an agent is anything that can be viewed as perceiving its environment through sensors and acting upon that environment through actuators.
+<br><br>
+<b>Applications of AI and ML</b>
+<br><br>
+Artificial intelligence and machine learning can be applied in many ways, allowing organizations to automate repetitive or manual processes that help drive informed decision-making.
+Companies across industries are using AI and ML in various ways to transform how they work and do business. Incorporating AI and ML capabilities into their strategies and systems helps organizations rethink how they use their data and available resources, drive productivity and efficiency, enhance data-driven decision-making through predictive analytics, and improve customer and employee experiences.   
+<br><br>
+<b>Here are some of the most common applications of AI and ML: </b>
+<br><br>
+<b>Healthcare and life sciences</b>
+<br>
+Patient health record analysis and insights, outcome forecasting and modeling, accelerated drug development, augmented diagnostics, patient monitoring, and information extraction from clinical notes.
+<br><br>
+<b>Manufacturing</b>
+<br>
+Production machine monitoring, predictive maintenance, IoT analytics, and operational efficiency.
+<br><br>
+<b>Ecommerce and retail</b>
+<br>
+Inventory and supply chain optimization, demand forecasting, visual search, personalized offers and experiences, and recommendation engines.
+<br><br>
+<b>Financial services</b>
+<br>
+Risk assessment and analysis, fraud detection, automated trading, and service processing optimization.
+<br><br>
+<b>Telecommunications</b>
+<br>
+Intelligent networks and network optimization, predictive maintenance, business process automation, upgrade planning, and capacity forecasting.
                                     </p>
                                 </div>
 
@@ -120,10 +128,24 @@ We use the term percept to refer to the agent's perceptional inputs at any given
                                 </div>
 
                                 <div class="pt-3 sm:pt-5">
-                                    <h2 class="text-xl font-semibold text-black dark:text-white">Intelligent Agent</h2>
+                                    <h2 class="text-xl font-semibold text-black dark:text-white">Common types of artificial neural networks</h2>
 
                                     <p class="mt-4 text-sm/relaxed">
-                                    In intelligence and artificial intelligence, an intelligent agent (IA) is an agent that perceives its environment, takes actions autonomously in order to achieve goals, and may improve its performance with learning or acquiring knowledge. An intelligent agent may be simple or complex: A thermostat or other control system is considered an example of an intelligent agent, as is a human being, as is any system that meets the definition, such as a firm, a state, or a biome.[1]
+                                    A common type of training model in AI is an artificial neural network, a model loosely based on the human brain. 
+<br><br>
+A neural network is a system of artificial neurons—sometimes called perceptrons—that are computational nodes used to classify and analyze data. The data is fed into the first layer of a neural network, with each perceptron making a decision, then passing that information onto multiple nodes in the next layer. Training models with more than three layers are referred to as “deep neural networks” or “deep learning.” Some modern neural networks have hundreds or thousands of layers. The output of the final perceptrons accomplish the task set to the neural network, such as classify an object or find patterns in data. 
+<br><br>
+Some of the most common types of artificial neural networks you may encounter include:
+    <br><br>
+Feedforward neural networks (FF) are one of the oldest forms of neural networks, with data flowing one way through layers of artificial neurons until the output is achieved. In modern days, most feedforward neural networks are considered “deep feedforward” with several layers (and more than one “hidden” layer). Feedforward neural networks are typically paired with an error-correction algorithm called “backpropagation” that, in simple terms, starts with the result of the neural network and works back through to the beginning, finding errors to improve the accuracy of the neural network. Many simple but powerful neural networks are deep feedforward.
+<br><br>
+Recurrent neural networks (RNN) differ from feedforward neural networks in that they typically use time series data or data that involves sequences. Unlike feedforward neural networks, which use weights in each node of the network, recurrent neural networks have “memory” of what happened in the previous layer as contingent to the output of the current layer. For instance, when performing natural language processing, RNNs can “keep in mind” other words used in a sentence. RNNs are often used for speech recognition, translation, and to caption images. 
+<br><br>
+Long/short term memory (LSTM) is an advanced form of RNN that can use memory to “remember” what happened in previous layers. The difference between RNNs and LSTM is that LSTM can remember what happened several layers ago, through the use of “memory cells.” LSTM is often used in speech recognition and making predictions. 
+<br><br>
+Convolutional neural networks (CNN) include some of the most common neural networks in modern artificial intelligence. Most often used in image recognition, CNNs use several distinct layers (a convolutional layer, then a pooling layer) that filter different parts of an image before putting it back together (in the fully connected layer). The earlier convolutional layers may look for simple features of an image, such as colors and edges, before looking for more complex features in additional layers.
+<br><br>
+Generative adversarial networks (GAN) involve two neural networks competing against each other in a game that ultimately improves the accuracy of the output. One network (the generator) creates examples that the other network (the discriminator) attempts to prove true or false. GANs have been used to create realistic images and even make art.
                                     </p>
                                 </div>
 
@@ -142,10 +164,60 @@ We use the term percept to refer to the agent's perceptional inputs at any given
                                 </div>
 
                                 <div class="pt-3 sm:pt-5">
-                                    <h2 class="text-xl font-semibold text-black dark:text-white">Artificial Intelligence</h2>
+                                    <h2 class="text-xl font-semibold text-black dark:text-white">Benefits of AI</h2>
 
                                     <p class="mt-4 text-sm/relaxed">
-                                    Artificial intelligence (AI), in its broadest sense, is intelligence exhibited by machines, particularly computer systems. It is a field of research in computer science that develops and studies methods and software that enable machines to perceive their environment and use learning and intelligence to take actions that maximize their chances of achieving defined goals.[1] Such machines may be called AIs.
+                                    <b>Automation:</b> AI can automate workflows and processes or work independently and autonomously from a human team. For example, AI can help automate aspects of cybersecurity by continuously monitoring and analyzing network traffic. Similarly, a smart factory may have dozens of different kinds of AI in use, such as robots using computer vision to navigate the factory floor or to inspect products for defects, create digital twins, or use real-time analytics to measure efficiency and output.
+                                    <br><br>
+                                    <b>Reduce human error:</b> AI can eliminate manual errors in data processing, analytics, assembly in manufacturing, and other tasks through automation and algorithms that follow the same processes every single time.
+                                    <br><br>
+                                    <b>Eliminate repetitive tasks:</b> AI can be used to perform repetitive tasks, freeing human capital to work on higher impact problems. AI can be used to automate processes, like verifying documents, transcribing phone calls, or answering simple customer questions like “what time do you close?” Robots are often used to perform “dull, dirty, or dangerous” tasks in the place of a human. 
+                                    <br><br>
+                                    <b>Fast and accurate:</b> AI can process more information more quickly than a human, finding patterns and discovering relationships in data that a human may miss.
+                                    <br><br>
+                                    <b>Infinite availability:</b> AI is not limited by time of day, the need for breaks, or other human encumbrances. When running in the cloud, AI and machine learning can be “always on,” continuously working on its assigned tasks. 
+                                    <br><br>
+                                    <b>Accelerated research and development:</b> The ability to analyze vast amounts of data quickly can lead to accelerated breakthroughs in research and development. For instance, AI has been used in predictive modeling of potential new pharmaceutical treatments, or to quantify the human genome. 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
+                                <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
+                                    <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <g fill="#FF2D20">
+                                            <path
+                                                d="M16.597 12.635a.247.247 0 0 0-.08-.237 2.234 2.234 0 0 1-.769-1.68c.001-.195.03-.39.084-.578a.25.25 0 0 0-.09-.267 8.8 8.8 0 0 0-4.826-1.66.25.25 0 0 0-.268.181 2.5 2.5 0 0 1-2.4 1.824.045.045 0 0 0-.045.037 12.255 12.255 0 0 0-.093 3.86.251.251 0 0 0 .208.214c2.22.366 4.367 1.08 6.362 2.118a.252.252 0 0 0 .32-.079 10.09 10.09 0 0 0 1.597-3.733ZM13.616 17.968a.25.25 0 0 0-.063-.407A19.697 19.697 0 0 0 8.91 15.98a.25.25 0 0 0-.287.325c.151.455.334.898.548 1.328.437.827.981 1.594 1.619 2.28a.249.249 0 0 0 .32.044 29.13 29.13 0 0 0 2.506-1.99ZM6.303 14.105a.25.25 0 0 0 .265-.274 13.048 13.048 0 0 1 .205-4.045.062.062 0 0 0-.022-.07 2.5 2.5 0 0 1-.777-.982.25.25 0 0 0-.271-.149 11 11 0 0 0-5.6 2.815.255.255 0 0 0-.075.163c-.008.135-.02.27-.02.406.002.8.084 1.598.246 2.381a.25.25 0 0 0 .303.193 19.924 19.924 0 0 1 5.746-.438ZM9.228 20.914a.25.25 0 0 0 .1-.393 11.53 11.53 0 0 1-1.5-2.22 12.238 12.238 0 0 1-.91-2.465.248.248 0 0 0-.22-.187 18.876 18.876 0 0 0-5.69.33.249.249 0 0 0-.179.336c.838 2.142 2.272 4 4.132 5.353a.254.254 0 0 0 .15.048c1.41-.01 2.807-.282 4.117-.802ZM18.93 12.957l-.005-.008a.25.25 0 0 0-.268-.082 2.21 2.21 0 0 1-.41.081.25.25 0 0 0-.217.2c-.582 2.66-2.127 5.35-5.75 7.843a.248.248 0 0 0-.09.299.25.25 0 0 0 .065.091 28.703 28.703 0 0 0 2.662 2.12.246.246 0 0 0 .209.037c2.579-.701 4.85-2.242 6.456-4.378a.25.25 0 0 0 .048-.189 13.51 13.51 0 0 0-2.7-6.014ZM5.702 7.058a.254.254 0 0 0 .2-.165A2.488 2.488 0 0 1 7.98 5.245a.093.093 0 0 0 .078-.062 19.734 19.734 0 0 1 3.055-4.74.25.25 0 0 0-.21-.41 12.009 12.009 0 0 0-10.4 8.558.25.25 0 0 0 .373.281 12.912 12.912 0 0 1 4.826-1.814ZM10.773 22.052a.25.25 0 0 0-.28-.046c-.758.356-1.55.635-2.365.833a.25.25 0 0 0-.022.48c1.252.43 2.568.65 3.893.65.1 0 .2 0 .3-.008a.25.25 0 0 0 .147-.444c-.526-.424-1.1-.917-1.673-1.465ZM18.744 8.436a.249.249 0 0 0 .15.228 2.246 2.246 0 0 1 1.352 2.054c0 .337-.08.67-.23.972a.25.25 0 0 0 .042.28l.007.009a15.016 15.016 0 0 1 2.52 4.6.25.25 0 0 0 .37.132.25.25 0 0 0 .096-.114c.623-1.464.944-3.039.945-4.63a12.005 12.005 0 0 0-5.78-10.258.25.25 0 0 0-.373.274c.547 2.109.85 4.274.901 6.453ZM9.61 5.38a.25.25 0 0 0 .08.31c.34.24.616.561.8.935a.25.25 0 0 0 .3.127.631.631 0 0 1 .206-.034c2.054.078 4.036.772 5.69 1.991a.251.251 0 0 0 .267.024c.046-.024.093-.047.141-.067a.25.25 0 0 0 .151-.23A29.98 29.98 0 0 0 15.957.764a.25.25 0 0 0-.16-.164 11.924 11.924 0 0 0-2.21-.518.252.252 0 0 0-.215.076A22.456 22.456 0 0 0 9.61 5.38Z"
+                                            />
+                                        </g>
+                                    </svg>
+                                </div>
+
+                                <div class="pt-3 sm:pt-5">
+                                    <h2 class="text-xl font-semibold text-black dark:text-white">Applications and use cases for artificial intelligence</h2>
+
+                                    <p class="mt-4 text-sm/relaxed">
+                                    <b>Speech recognition:</b> Automatically convert spoken speech into written text.
+                                    <br><br>
+                                    <b>Image recognition:</b> Identify and categorize various aspects of an image.
+                                    <br><br>
+                                    <b>Translation:</b> Translate written or spoken words from one language into another.
+                                    <br><br>
+                                    <b>Predictive modeling:</b> Mine data to forecast specific outcomes with high degrees of granularity.
+                                    <br><br>
+                                    <b>Data analytics:</b> Find patterns and relationships in data for business intelligence.
+                                    <br><br>
+                                    <b>Cybersecurity:</b> Autonomously scan networks for cyber attacks and threats.
+                                    <br><br>
+                                    <b>Artificial intelligence (AI) vs. machine learning (ML)</b>
+                                    <br><br>
+You might hear people use artificial intelligence (AI) and machine learning (ML) interchangeably, especially when discussing big data, predictive analytics, and other digital transformation topics. The confusion is understandable as artificial intelligence and machine learning are closely related. However, these trending technologies differ in several ways, including scope, applications, and more.  
+<br><br>
+Increasingly AI and ML products have proliferated as businesses use them to process and analyze immense volumes of data, drive better decision-making, generate recommendations and insights in real time, and create accurate forecasts and predictions. 
+<br><br>
+So, what exactly is the difference when it comes to ML vs. AI, how are ML and AI connected, and what do these terms mean in practice for organizations today? 
+<br><br>
+We’ll break down AI vs. ML and explore how these two innovative concepts are related and what makes them different from each other.
                                     </p>
                                 </div>
                             </div>
