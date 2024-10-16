@@ -119,6 +119,7 @@ class CampaignActions extends Command
                         }
                     } else {
                         DB::update("update campaigns set status='Completed' where id=" . $campaign->id . ";");
+                        return 0;
                     }
                 }
             } else {
