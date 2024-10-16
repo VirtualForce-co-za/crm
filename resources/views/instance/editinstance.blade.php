@@ -20,7 +20,7 @@
                     <div class="col-span-6 sm:col-span-4">
                         <x-label for="owntrunk" value="{{ __('owntrunk') }}" />
                         <input id="owntrunk" name="owntrunk" type="checkbox" class="mt-1 block" value="1" 
-                        @if ($user->owntrunk == 1)
+                        @if ($instance->owntrunk == 1)
                              checked
                         @endif 
                         />
