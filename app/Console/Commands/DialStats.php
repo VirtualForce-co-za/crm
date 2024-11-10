@@ -49,6 +49,7 @@ class DialStats extends Command
         sum(callduration) as callduration, 
         count(dd.id) as dial
         from dial_dispositions dd join campaigns c on dd.campaignid=c.id
+        where DATE_FORMAT(dd.created_at, '%Y-%m-%d')=curdate()
         group by DATE_FORMAT(dd.created_at, '%Y-%m-%d'), campaignid, instanceid, c.name ON DUPLICATE KEY UPDATE 
         dispositiondate=DATE_FORMAT(dispositiondate, '%Y-%m-%d'), 
         campaignid=campaignid,
@@ -56,6 +57,23 @@ class DialStats extends Command
         campaign=campaign,
         callduration=callduration,
         dial=dial;");
+
+        DB::update("insert into dial_stat_by_rows (dispositiondate, campaignid, instanceid, campaign, connected, connected_duration, connected_percent)
+        select DATE_FORMAT(dd.created_at, '%Y-%m-%d') as dispositiondate, campaignid, dd.instanceid, c.name as campaign, 
+        count(dd.id) as connected,
+        sum(callduration) as connected_duration, 
+        ((count(dd.id)/dial)*100) as connected_percent
+        from dial_dispositions dd join campaigns c on dd.campaignid=c.id
+        where dd.disposition not in ('No Answer', 'Busy', 'Failed', 'Voicemail', 'Silent')
+        # and DATE_FORMAT(dd.created_at, '%Y-%m-%d')=curdate()
+        group by DATE_FORMAT(dd.created_at, '%Y-%m-%d'), campaignid, instanceid, c.name ON DUPLICATE KEY UPDATE 
+        dispositiondate=DATE_FORMAT(dispositiondate, '%Y-%m-%d'), 
+        campaignid=campaignid,
+        instanceid=instanceid,
+        campaign=campaign,
+        connected=connected,
+        connected_duration=connected_duration,
+        connected_percent=connected_percent;");
 
         return 0;
     }
