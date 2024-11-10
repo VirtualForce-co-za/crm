@@ -43,6 +43,21 @@ class DialStats extends Command
         dispositionid=dispositionid,
         disposition=disposition,
         callduration=callduration;");
+
+        DB::update("insert into dial_stat_by_rows (dispositiondate, campaignid, instanceid, campaign, callduration, dial)
+        select DATE_FORMAT(dd.created_at, '%Y-%m-%d') as dispositiondate, campaignid, dd.instanceid, c.name as campaign, 
+        sum(callduration) as callduration, 
+        count(dd.id) as dial
+        from dial_dispositions dd join campaigns c on dd.campaignid=c.id
+        where DATE_FORMAT(dd.created_at, '%Y-%m-%d')=curdate()
+        group by DATE_FORMAT(dd.created_at, '%Y-%m-%d'), campaignid ON DUPLICATE KEY UPDATE 
+        dispositiondate=DATE_FORMAT(dispositiondate, '%Y-%m-%d'), 
+        campaignid=campaignid,
+        instanceid=instanceid,
+        campaign=campaign,
+        callduration=callduration,
+        dial=dial;");
+
         return 0;
     }
 }
