@@ -50,7 +50,7 @@ class DialStats extends Command
         count(dd.id) as dial
         from dial_dispositions dd join campaigns c on dd.campaignid=c.id
         where DATE_FORMAT(dd.created_at, '%Y-%m-%d')=curdate()
-        group by DATE_FORMAT(dd.created_at, '%Y-%m-%d'), campaignid ON DUPLICATE KEY UPDATE 
+        group by DATE_FORMAT(dd.created_at, '%Y-%m-%d'), campaignid, instanceid, c.name ON DUPLICATE KEY UPDATE 
         dispositiondate=DATE_FORMAT(dispositiondate, '%Y-%m-%d'), 
         campaignid=campaignid,
         instanceid=instanceid,
