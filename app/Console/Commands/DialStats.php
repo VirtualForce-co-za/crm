@@ -63,8 +63,6 @@ class DialStats extends Command
         count(dd.id) as connected,
         sum(callduration) as connected_duration
         from dial_dispositions dd join campaigns c on dd.campaignid=c.id
-        where dd.disposition not in ('No Answer', 'Busy', 'Failed', 'Voicemail', 'Silent')
-        # and DATE_FORMAT(dd.created_at, '%Y-%m-%d')=curdate()
         group by DATE_FORMAT(dd.created_at, '%Y-%m-%d'), campaignid, instanceid, c.name ON DUPLICATE KEY UPDATE 
         dispositiondate=DATE_FORMAT(dispositiondate, '%Y-%m-%d'), 
         campaignid=campaignid,
