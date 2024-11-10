@@ -61,7 +61,7 @@ class DialStats extends Command
         DB::update("insert into dial_stat_by_rows (dispositiondate, campaignid, instanceid, campaign, connected, connected_duration)
         select DATE_FORMAT(dd.created_at, '%Y-%m-%d') as dispositiondate, campaignid, dd.instanceid, c.name as campaign, 
         count(dd.id) as connected,
-        sum(callduration) as connected_duration, 
+        sum(callduration) as connected_duration
         from dial_dispositions dd join campaigns c on dd.campaignid=c.id
         where dd.disposition not in ('No Answer', 'Busy', 'Failed', 'Voicemail', 'Silent')
         # and DATE_FORMAT(dd.created_at, '%Y-%m-%d')=curdate()
