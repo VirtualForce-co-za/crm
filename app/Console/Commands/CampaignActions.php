@@ -51,7 +51,10 @@ class CampaignActions extends Command
                         $bearer = $campaign->whitelabelinstance->bearer;
                         $dialprefix = $campaign->whitelabelinstance->dialprefix;
                     }
-                    
+                    $agentid = $campaign->agent->id;
+                    if($agentid == 4){
+                        $cps = 10;
+                    }
                     $agent = $campaign->agent->location;
                     $cli = $campaign->cli;
                     if ($campaign->status == 'dialing') {
@@ -117,6 +120,7 @@ class CampaignActions extends Command
                                 DB::update("update leads set status=1, dial_api_response='" . $e->getMessage() . "', updated_at=NOW() where id='" . $lead->id . "';");
                             }
                         }
+                        sleep(1);
                     } else {
                         DB::update("update campaigns set status='Completed' where id=" . $campaign->id . ";");
                         return 0;
