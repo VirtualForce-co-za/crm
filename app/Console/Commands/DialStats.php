@@ -32,9 +32,9 @@ class DialStats extends Command
     {
         set_time_limit(0);
         DB::update("insert into dial_stats
-        select DATE_FORMAT(dd.created_at, '%Y-%m-%d') as dispositiondate, campaignid, instanceid, campaign, dispositionid, 
+        select DATE_FORMAT(dd.created_at, '%Y-%m-%d') as dispositiondate, campaignid, dd.instanceid, campaign, dispositionid, 
         disposition, sum(callduration) as callduration from dial_dispositions dd join campaigns c on dd.campaignid=c.id
-        group by DATE_FORMAT(dd.created_at, '%Y-%m-%d'), campaignid, instanceid, campaign, dispositionid, 
+        group by DATE_FORMAT(dd.created_at, '%Y-%m-%d'), campaignid, dd.instanceid, campaign, dispositionid, 
         disposition
         on duplicate key update 
         dispositiondate=DATE_FORMAT(dd.created_at, '%Y-%m-%d'), 
