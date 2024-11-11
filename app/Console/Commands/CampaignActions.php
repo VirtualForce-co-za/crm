@@ -38,6 +38,10 @@ class CampaignActions extends Command
             })->get();
             if ($campaigns->isNotEmpty()) {
                 foreach ($campaigns as $campaign) {
+                    if($campaign->instance->credits <= 0){
+                        DB::update("update campaigns set status='paused' where id=" . $campaign->id . ";");
+                        return 0;
+                    }
                     if ($campaign->instance->owntrunk == 1) {
                         $cps = $campaign->instance->cps;
                         $accountsid = $campaign->instance->accountsid;

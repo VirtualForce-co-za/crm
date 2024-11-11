@@ -52,6 +52,11 @@
                         <x-input id="cps" name="cps" type="text" class="mt-1 block w-full" required />
                         <x-input-error for="cps" class="mt-2" />
                     </div>
+                    <div class="col-span-6 sm:col-span-4">
+                        <x-label for="credits" value="{{ __('Credits') }}" />
+                        <x-input id="credits" name="credits" type="text" class="mt-1 block w-full" required />
+                        <x-input-error for="credits" class="mt-2" />
+                    </div>
                     @endif
                     </br>
                     <x-button type="submit">Save</x-button>

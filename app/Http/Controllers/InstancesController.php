@@ -27,6 +27,12 @@ class InstancesController extends Controller
         }
     }
 
+    public function credits()
+    {
+        $instance = Instances::where('id', Auth::user()->instanceid)->first();
+        return view('instance/credits', compact('instance'));
+    }
+
     public function editinstance(Request $request)
     {
         if (auth::id() == 1) {
@@ -52,6 +58,7 @@ class InstancesController extends Controller
             $instance->bearer = $request->input('bearer');
             $instance->dialprefix = $request->input('dialprefix');
             $instance->cps = $request->input('cps');
+            $instance->credits = $request->input('credits');
             $instance->whitelabeluserid = 1;
             if($request->input('owntrunk') == "1"){
                 $instance->owntrunk = 1;
@@ -86,6 +93,7 @@ class InstancesController extends Controller
             $bearer = $request->input('bearer');
             $dialprefix = $request->input('dialprefix');
             $cps = $request->input('cps');
+            $credits = $request->input('credits');
             if($request->input('owntrunk') == "1"){
                 $owntrunk = 1;
             }
@@ -100,6 +108,7 @@ class InstancesController extends Controller
                         bearer='" . $bearer . "', 
                         dialprefix='" . $dialprefix . "', 
                         cps=" . $cps . ", 
+                        credits=" . $credits . ", 
                         owntrunk=" . $owntrunk . ", 
                         updated_at=NOW() where id=" . $instanceid . ";");
 

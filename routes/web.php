@@ -7,6 +7,7 @@ use App\Http\Controllers\AgentsController;
 use App\Http\Controllers\AgentResponsesController;
 use App\Http\Controllers\CampaignsController;
 use App\Http\Controllers\DispositionsController;
+use App\Http\Controllers\ReportsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,6 +27,11 @@ Route::middleware([
     Route::get('/editinstance', [InstancesController::class, 'editinstance'])->name('editinstance');
     Route::post('/editinstancesubmit', [InstancesController::class, 'editinstancesubmit'])->name('editinstancesubmit');
     Route::get('/instances', [InstancesController::class, 'instances'])->name('instances');
+
+    Route::get('/credits', [InstancesController::class, 'credits'])->name('credits');
+
+    Route::get('/dialstats', [ReportsController::class, 'dialstats'])->name('dialstats');
+    Route::get('/dialstats_submit', [ReportsController::class, 'dialstats_submit'])->name('dialstats_submit');
 
     Route::get('adddisposition', function () {return view('disposition/adddisposition');})->name('adddisposition');
     Route::post('/adddispositionsubmit', [DispositionsController::class, 'adddispositionsubmit'])->name('adddispositionsubmit');
