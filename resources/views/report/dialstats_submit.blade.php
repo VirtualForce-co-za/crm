@@ -40,7 +40,7 @@
                 </tr>
                 </table>
             <br/><br/>
-            <table  cellspacing="0" width="100%">
+            <table  cellspacing="0" width="100%" style="border: 1px solid #cccccc;">
                                                     <tr>
                                                         <td><strong>campaign</strong></td>
                                                         <td><strong>Dial</strong></td>
@@ -61,18 +61,18 @@
                                                     @foreach($dial_stat_by_rows as $dialstats)
                                                     <tr>
                                                         <td>{{$dialstats->campaign}}</td>
-                                                        <td>{{$dialstats->dial}}<br/>{{$dialstats->callduration}}</td>
-                                                        <td>{{$dialstats->connected}}<br/>{{$dialstats->connected_percent}}<br/>{{$dialstats->connected_duration}}</td>
-                                                        <td>{{$dialstats->noanswer}}<br/>{{$dialstats->noanswer_percent}}<br/>{{$dialstats->noanswer_duration}}</td>
-                                                        <td>{{$dialstats->callback}}<br/>{{$dialstats->callback_percent}}<br/>{{$dialstats->callback_duration}}</td>
-                                                        <td>{{$dialstats->voicemail}}<br/>{{$dialstats->voicemail_percent}}<br/>{{$dialstats->voicemail_duration}}</td>  
-                                                        <td>{{$dialstats->silent}}<br/>{{$dialstats->silent_percent}}<br/>{{$dialstats->silent_duration}}</td>
-                                                        <td>{{$dialstats->qualified}}<br/>{{$dialstats->qualified_percent}}<br/>{{$dialstats->qualified_duration}}</td>     
-                                                        <td>{{$dialstats->busy}}<br/>{{$dialstats->busy_percent}}<br/>{{$dialstats->busy_duration}}</td>  
-                                                        <td>{{$dialstats->failed}}<br/>{{$dialstats->failed_percent}}<br/>{{$dialstats->failed_duration}}</td>      
-                                                        <td>{{$dialstats->notinterested}}<br/>{{$dialstats->notinterested_percent}}<br/>{{$dialstats->notinterested_duration}}</td>            
-                                                        <td>{{$dialstats->dnq}}<br/>{{$dialstats->dnq_percent}}<br/>{{$dialstats->dnq_duration}}</td>            
-                                                        <td>{{$dialstats->others}}<br/>{{$dialstats->others_percent}}<br/>{{$dialstats->others_duration}}</td>                                                        
+                                                        <td>{{$dialstats->dial}}<br/>{{number_format($dialstats->callduration/60, 2)}} minutes</td>
+                                                        <td>{{$dialstats->connected}}<br/>{{number_format($dialstats->connected_percent, 2)}}%<br/>{{number_format($dialstats->connected_duration/60, 2)}} minutes</td>
+                                                        <td>{{$dialstats->noanswer}}<br/>{{number_format($dialstats->noanswer_percent, 2)}}%<br/>{{number_format($dialstats->noanswer_duration/60, 2)}} minutes</td>
+                                                        <td>{{$dialstats->callback}}<br/>{{number_format($dialstats->callback_percent, 2)}}%<br/>{{number_format($dialstats->callback_duration/60, 2)}} minutes</td>
+                                                        <td>{{$dialstats->voicemail}}<br/>{{number_format($dialstats->voicemail_percent, 2)}}%<br/>{{number_format($dialstats->voicemail_duration/60, 2)}} minutes</td>  
+                                                        <td>{{$dialstats->silent}}<br/>{{number_format($dialstats->silent_percent, 2)}}%<br/>{{number_format($dialstats->silent_duration/60, 2)}} minutes</td>
+                                                        <td>{{$dialstats->qualified}}<br/>{{number_format($dialstats->qualified_percent, 2)}}%<br/>{{number_format($dialstats->qualified_duration/60, 2)}} minutes</td>     
+                                                        <td>{{$dialstats->busy}}<br/>{{number_format($dialstats->busy_percent, 2)}}%<br/>{{number_format($dialstats->busy_duration/60, 2)}} minutes</td>  
+                                                        <td>{{$dialstats->failed}}<br/>{{number_format($dialstats->failed_percent, 2)}}%<br/>{{number_format($dialstats->failed_duration/60, 2)}} minutes</td>      
+                                                        <td>{{$dialstats->notinterested}}<br/>{{number_format($dialstats->notinterested_percent, 2)}}%<br/>{{number_format($dialstats->notinterested_duration/60, 2)}} minutes</td>            
+                                                        <td>{{$dialstats->dnq}}<br/>{{number_format($dialstats->dnq_percent, 2)}}%<br/>{{number_format($dialstats->dnq_duration/60, 2)}} minutes</td>            
+                                                        <td>{{$dialstats->others}}<br/>{{number_format($dialstats->others_percent, 2)}}%<br/>{{number_format($dialstats->others_duration/60, 2)}} minutes</td>                                                        
                                                     </tr>
                                                     @endforeach
                                                 
