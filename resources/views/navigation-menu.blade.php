@@ -68,6 +68,9 @@
                             <x-dropdown-link href="{{ route('dialstats') }}">
                                 {{ __('Dial Stats') }}
                             </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('dialstatsfull') }}">
+                                {{ __('Dial Stats - Full') }}
+                            </x-dropdown-link>
                             <div class="border-t border-gray-200 dark:border-gray-600"></div>
                         </x-slot>
                     </x-dropdown>
@@ -247,6 +250,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('dialstats') }}" :active="request()->routeIs('dialstats')">
                         {{ __('Dial Stats') }} 
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('dialstatsfull') }}" :active="request()->routeIs('dialstatsfull')">
+                        {{ __('Dial Stats - Full') }} 
             </x-responsive-nav-link>
         </div>
 

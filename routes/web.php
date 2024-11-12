@@ -33,6 +33,9 @@ Route::middleware([
     Route::get('/dialstats', [ReportsController::class, 'dialstats'])->name('dialstats');
     Route::get('/dialstats_submit', [ReportsController::class, 'dialstats_submit'])->name('dialstats_submit');
 
+    Route::get('/dialstatsfull', [ReportsController::class, 'dialstatsfull'])->name('dialstatsfull');
+    Route::get('/dialstatsfull_submit', [ReportsController::class, 'dialstatsfull_submit'])->name('dialstatsfull_submit');
+
     Route::get('adddisposition', function () {return view('disposition/adddisposition');})->name('adddisposition');
     Route::post('/adddispositionsubmit', [DispositionsController::class, 'adddispositionsubmit'])->name('adddispositionsubmit');
     Route::get('/editdisposition', [DispositionsController::class, 'editdisposition'])->name('editdisposition');
