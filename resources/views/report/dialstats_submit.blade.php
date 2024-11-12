@@ -70,7 +70,7 @@
                                                     </tr>
 
                                                     @foreach($dial_stat_by_rows as $dialstats)
-                                                    <tr style="border: 1px solid #dddddd;">
+                                                    <tr style="border: 1px solid #dddddd;background-color:#ffffff;">
                                                         <td>{{$dialstats->campaign}}</td>
                                                         <td>{{$dialstats->dial}}<br/>{{number_format($dialstats->callduration/60, 2)}} minutes</td>
                                                         <td>{{$dialstats->connected}}<br/>{{number_format($dialstats->connected_percent, 2)}}%<br/>{{number_format($dialstats->connected_duration/60, 2)}} minutes</td>
