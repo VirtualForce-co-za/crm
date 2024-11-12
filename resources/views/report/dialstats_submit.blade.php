@@ -40,7 +40,7 @@
                 </tr>
                 </table>
             <br/><br/>
-            <table  cellspacing="1" width="100%" style="border: 1px solid #cccccc; font-size:10px;">
+            <table  border="1" cellspacing="1" cellpadding="1" width="100%" style="border: 1px solid #cccccc; font-size:10px;">
                                                     <tr>
                                                         <td><strong>campaign</strong></td>
                                                         <td><strong>Dial</strong></td>
