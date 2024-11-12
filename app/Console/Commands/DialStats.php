@@ -307,7 +307,7 @@ class DialStats extends Command
         reason_unknown_percent = CASE WHEN connected > 0 THEN (reason_unknown/connected)*100 ELSE 0 END, 
         timeout_percent = CASE WHEN connected > 0 THEN (timeout/connected)*100 ELSE 0 END, 
         user_hangup_percent = CASE WHEN connected > 0 THEN (user_hangup/connected)*100 ELSE 0 END        
-        where DATE_FORMAT(dd.created_at, '%Y-%m-%d')=curdate();");
+        where DATE_FORMAT(dispositiondate, '%Y-%m-%d')=curdate();");
 
         return 0;
     }
