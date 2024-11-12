@@ -40,8 +40,8 @@
                 </tr>
                 </table>
             <br/><br/>
-            <table width="100%" style="font-size:10px;">
-                                                    <tr>
+            <table width="100%" style="border: 1px solid #eeeeee; font-size:10px;">
+                                                    <tr style="border: 1px solid #eeeeee;">
                                                         <td><strong>campaign</strong></td>
                                                         <td><strong>Dial</strong></td>
                                                         <td><strong>Connected</strong></td>
@@ -59,7 +59,7 @@
                                                     </tr>
 
                                                     @foreach($dial_stat_by_rows as $dialstats)
-                                                    <tr>
+                                                    <tr style="border: 1px solid #eeeeee;">
                                                         <td>{{$dialstats->campaign}}</td>
                                                         <td>{{$dialstats->dial}}<br/>{{number_format($dialstats->callduration/60, 2)}} minutes</td>
                                                         <td>{{$dialstats->connected}}<br/>{{number_format($dialstats->connected_percent, 2)}}%<br/>{{number_format($dialstats->connected_duration/60, 2)}} minutes</td>
