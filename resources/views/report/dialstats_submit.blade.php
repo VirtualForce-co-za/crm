@@ -21,6 +21,17 @@
   dateFormat: "yy-mm-dd"
 });
   } );
+
+  function validate()
+  {
+    if(document.getElementById('datepicker_from').value == "" || document.getElementById('datepicker_to').value == ""){
+        alert("Select Date Range");
+        return false;
+    }
+    else{
+        return true;
+    }
+  }
   </script>
 
     <div>
@@ -29,7 +40,7 @@
         <table  cellspacing="0" width="100%">
                 <tr>
                 <td style="text-align:center;">
-                <form id="addinstancesubmit" method="GET" action="/dialstats_submit">
+                <form id="addinstancesubmit" method="GET" action="/dialstats_submit" onsubmit="javascript: return validate();">
                 @csrf    
                 <strong>Date From: <input type="text" id="datepicker_from" name="datepicker_from" size="30"></strong>
                 <strong>&nbsp; Date To: <input type="text" id="datepicker_to" name="datepicker_to" size="30"></strong>
