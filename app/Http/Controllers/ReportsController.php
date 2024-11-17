@@ -8,7 +8,11 @@ use DB;
 use Auth;
 use App\Models\DialStatByRows;
 use App\Models\Campaigns;
-
+use App\Models\Leads;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
+//use Storage;
+use Aws\S3\S3Client;
 
 class ReportsController extends Controller
 {
@@ -27,6 +31,96 @@ class ReportsController extends Controller
         $campaigns = Campaigns::select('name')->where('instanceid', Auth::user()->instanceid)
                         ->groupby('name')->get();
         return view('report/dialstatsfull', compact('campaigns')); 
+    }
+
+    public function callrecording(Request $request)
+    {
+      
+        $id = $request->input('id');
+        $lead = Leads::where('id', $id)
+                     ->where('instanceid', Auth::user()->instanceid)
+                     ->first();
+
+                     /* This works
+                     $leadDate = $lead->updated_at;
+                     $filename_db = $lead->callsid;
+                     //take of the time of the date
+                     $leadDate = $leadDate->format('Y/m/d');
+                     \Log::debug($leadDate);
+ 
+                     $s3Disk = 's3_virtualforce';  // Adjust this based on your configured S3 disk name
+ 
+                     // Specify the S3 path of the audio file
+                     $s3Path = $leadDate.'/'.$filename_db.'.mp3';
+                     \Log::debug('S3 Path: '.$s3Path);
+ 
+                     // Specify the local path where you want to save the downloaded file
+                     $localFilename = $filename_db.'.mp3';
+                     \Log::debug('localFilename: '.$localFilename);
+ 
+                     $localFilePath = storage_path($localFilename);
+                     \Log::debug('localPath: '.$localFilePath);
+ 
+                     if(!file_exists($localFilePath)){
+                         // Download the file from S3 to the local storage
+                         \Log::debug('Downloading audio file from S3...');
+                         $contents = Storage::disk($s3Disk)->get($s3Path);
+                         file_put_contents($localFilePath, $contents);
+ 
+                     }
+ 
+                     // Serve the audio file with appropriate headers
+                     header('Content-Type: audio/mpeg');  // Adjust the content type as needed
+                     header(sprintf('Content-Length: %s', filesize($localFilePath)));
+ 
+                     $fh = fopen($localFilePath, 'rb');
+                     fpassthru($fh);
+                     fclose($fh);
+                     */
+            /*         
+        
+*/
+        $call_date = $lead->updated_at->format('Y/m/d');    
+        $callsid = $lead->callsid;
+        $url_download = $call_date.'/'.$callsid.'.mp3';
+        $headers = [
+            'Content-Type'        => 'audio/mpeg',
+            'Content-Disposition' => 'attachment; filename="'. $id .'.mp3"',
+        ];
+        //return Storage::disk('s3')->response('2024/11/13/5520bc23-08b3-4773-bf0f-24b296f2ae93.mp3');
+        //$a = Storage::disk('s3_virtualforce')->url('2024/11/13/5520bc23-08b3-4773-bf0f-24b296f2ae93.mp3');
+        //$a = Storage::disk('s3_virtualforce')->get('');
+        //dd($a);
+        //$contents = Storage::disk('s3_virtualforce')->get($url_download);
+        //file_put_contents($localFilePath, $contents);
+        //dd(Storage::disk('s3_virtualforce')->get($url_download));
+        
+        return Response::make(Storage::disk('s3_virtualforce')->get($url_download), 200, $headers);
+    }
+
+    public function qualifiedleads()
+    {
+        $campaigns = Campaigns::select('name')->where('instanceid', Auth::user()->instanceid)
+                        ->groupby('name')->get();
+        return view('report/qualifiedleads', compact('campaigns')); 
+    }
+
+    public function qualifiedleads_submit(Request $request)
+    {
+        $datepicker_from = $request->input('datepicker_from');
+        $datepicker_to = $request->input('datepicker_to');
+        $campaign = $request->input('campaign');
+        $campaigns = Campaigns::select('name')->where('instanceid', Auth::user()->instanceid)
+                        ->groupby('name')->get();
+        $qualifiedleads = Leads::select('leads.id', 'leads.cellno', 'leads.callsid', 'campaigns.name as campaignname')
+                          ->join('campaigns', 'leads.campaignid', '=', 'campaigns.id')
+                          ->where('leads.instanceid', Auth::user()->instanceid)
+                          ->where('campaigns.name', $campaign)
+                          ->where('leads.updated_at', '>=' , $datepicker_from . ' 00:00:00')
+                          ->where('leads.updated_at', '<=' , $datepicker_to . ' 23:59:59')
+                          ->orderBy('leads.id', 'desc')
+                          ->paginate(25);
+        return view('report/qualifiedleads_submit', compact('campaigns', 'qualifiedleads')); 
     }
 
     public function dialstats_submit(Request $request)
