@@ -80,6 +80,16 @@ class ReportsController extends Controller
             /*         
         
 */
+        $s3Bucket = "";
+        if($lead->instanceid == 1){
+            $s3Bucket = 's3_virtualforce';    
+        }
+        elseif($lead->instanceid == 2){
+            $s3Bucket = 's3_onemobile';    
+        }
+        elseif($lead->instanceid == 3){
+            $s3Bucket = 's3_dsa';    
+        }
         $call_date = $lead->updated_at->format('Y/m/d');    
         $callsid = $lead->callsid;
         $url_download = $call_date.'/'.$callsid.'.mp3';
@@ -95,7 +105,7 @@ class ReportsController extends Controller
         //file_put_contents($localFilePath, $contents);
         //dd(Storage::disk('s3_virtualforce')->get($url_download));
         
-        return Response::make(Storage::disk('s3_virtualforce')->get($url_download), 200, $headers);
+        return Response::make(Storage::disk($s3Bucket)->get($url_download), 200, $headers);
     }
 
     public function qualifiedleads()
