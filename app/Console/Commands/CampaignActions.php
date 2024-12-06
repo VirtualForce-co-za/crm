@@ -57,7 +57,7 @@ class CampaignActions extends Command
                     }
                     $agentid = $campaign->agent->id;
                     if($agentid == 4){
-                        $cps = 10;
+                        $cps = 5;
                     }
                     $agent = $campaign->agent->location;
                     $cli = $campaign->cli;
