@@ -110,7 +110,7 @@ class CampaignsController extends Controller
             $campaign->status = "file uploaded";
             $campaign->save();
 
-            $cmd = "php /var/www/crm/artisan app:campaign-file-uploads " . $campaignid;
+            $cmd = "php /var/www/crm/artisan app:campaign-file-uploads " . $campaignid. " " . $request->input('datatype');
             $outputfile = '/var/www/crm/storage/output' . $campaignid;
             $pidfile = '/var/www/crm/storage/pidfile' . $campaignid;
             exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $outputfile, $pidfile));

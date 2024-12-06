@@ -55,15 +55,34 @@
                     
                     </br>
 
+                    <div class="col-span-6 sm:col-span-4">
+                        <x-label for="datatype" value="{{ __('Data Type') }}" />
+                        <select id="datatype" name="datatype" class="mt-1 block w-full" required>
+                                        <option value="">Choose...</option>
+                                        <option value="cellnoonly">Cell Number Only</option>
+                                        <option value="cellnowithdetalis">Cell Number with Details</option>
+                                    </select>
+                    </div>
+                    
+                    </br>
+
 <div class="col-span-6 sm:col-span-4">
                         <x-label for="filename" value="{{ __('Upload CSV File') }}" />
                         <input type="file" accept=".csv" name="filename" class="mt-1 block w-full" id="filename" required="required" />
                         </br>
                         File Format Example (only cellno is mandatory and first line should be a header as example below):
                         </br>
+                        Data Type: Cell Number with Details
+                        </br>
                         title,name,surname,cellno,idno
                         </br>
                         ,,,0635047355,
+                        </br></br></br>
+                        Data Type: Cell Number Only
+                        </br>
+                        cellno
+                        </br>
+                        0635047355
                     </div>
 
                     

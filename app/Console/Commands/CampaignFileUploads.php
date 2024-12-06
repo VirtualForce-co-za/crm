@@ -14,7 +14,7 @@ class CampaignFileUploads extends Command
      *
      * @var string
      */
-    protected $signature = 'app:campaign-file-uploads {campaignid}';
+    protected $signature = 'app:campaign-file-uploads {campaignid} {datatype}';
 
     /**
      * The console command description.
@@ -30,6 +30,7 @@ class CampaignFileUploads extends Command
     {
         set_time_limit(0);
         $campaignid = $this->argument('campaignid');
+        $datatype = $this->argument('datatype');
         $campaign = Campaigns::where('id', $campaignid)->first();
         $file = storage_path('imports/' . $campaign->filename);
         $linenumber = 0;
@@ -38,6 +39,26 @@ class CampaignFileUploads extends Command
         if (($handle = fopen($file, "r")) !== FALSE) {
             while (($row = fgetcsv($handle, 0, ',')) !== false) {
                 if($linenumber == 1){
+if($datatype == "cellnoonly"){
+    $row[0] = utf8_encode($row[0]);
+                if ($row[0] != "" && $row[0] != "NULL" && $row[0] != null) {
+                    $cellno = str_replace(' ', '', $row[0]);
+                    $cellno = preg_replace('/[^0-9]/', '', $cellno);
+                    $cellno = '0' . substr($cellno, -9);
+                    
+                    $cellnodncs = DB::table('cellnodncs')->where('cellno', $cellno)
+                    ->where('instanceid', $campaign->instance->id)->first();
+
+                        if (strlen($cellno) === 10) {
+                            $lead = new Leads();
+                            $lead->campaignid = $campaignid;
+                            $lead->instanceid = $campaign->instance->id;
+                            $lead->cellno = $cellno;
+                            $lead->save();
+                    }
+                }
+}
+                    else{
                 $row[3] = utf8_encode($row[3]);
                 if ($row[3] != "" && $row[3] != "NULL" && $row[3] != null) {
                     $cellno = str_replace(' ', '', $row[3]);
@@ -62,6 +83,7 @@ class CampaignFileUploads extends Command
                             $lead->save();
                     }
                 }
+            }
             }else{
                 $linenumber = 1;
                 $campaign->status = 'data importing';
