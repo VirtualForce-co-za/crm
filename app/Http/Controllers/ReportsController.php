@@ -91,6 +91,9 @@ class ReportsController extends Controller
         elseif($lead->instanceid == 3){
             $s3Bucket = 's3_dsa';    
         }
+        elseif($lead->instanceid == 6){
+            $s3Bucket = 's3_commza';    
+        }
         $call_date = $lead->updated_at->format('Y/m/d');    
         $callsid = $lead->callsid;
         $url_download = $call_date.'/'.$callsid.'.mp3';
@@ -173,8 +176,9 @@ class ReportsController extends Controller
             'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
             'Expires' => '0',
         ];
-
-        return response()->stream(function () {
+        
+        return response()->stream(function () use ($leads) {
+            dd("debug 2");
             $handle = fopen('php://output', 'w');
         
             fputcsv($handle, [
@@ -205,7 +209,7 @@ class ReportsController extends Controller
         // Close CSV file handle
         fclose($handle);
     }, 200, $headers);
-    return 0;
+    
     }
 
     public function dialstats_submit(Request $request)
