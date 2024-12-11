@@ -205,6 +205,7 @@ class ReportsController extends Controller
         // Close CSV file handle
         fclose($handle);
     }, 200, $headers);
+    return 0;
     }
 
     public function dialstats_submit(Request $request)
