@@ -39,6 +39,9 @@ Route::middleware([
     Route::get('/qualifiedleads', [ReportsController::class, 'qualifiedleads'])->name('qualifiedleads');
     Route::get('/qualifiedleads_submit', [ReportsController::class, 'qualifiedleads_submit'])->name('qualifiedleads_submit');
 
+    Route::get('/fileexport', [ReportsController::class, 'fileexport'])->name('fileexport');
+    Route::get('/fileexport_submit', [ReportsController::class, 'fileexport_submit'])->name('fileexport_submit');
+
     Route::get('/callrecording', [ReportsController::class, 'callrecording'])->name('callrecording');
 
     Route::get('adddisposition', function () {return view('disposition/adddisposition');})->name('adddisposition');

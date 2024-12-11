@@ -9,6 +9,7 @@ use Auth;
 use App\Models\DialStatByRows;
 use App\Models\Campaigns;
 use App\Models\Leads;
+use App\Models\Dispositions;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 //use Storage;
@@ -131,6 +132,79 @@ class ReportsController extends Controller
                           ->orderBy('leads.id', 'desc')
                           ->paginate(25);
         return view('report/qualifiedleads_submit', compact('campaigns', 'qualifiedleads')); 
+    }
+
+    public function fileexport()
+    {
+        $campaigns = Campaigns::select('name')->where('instanceid', Auth::user()->instanceid)
+                        ->groupby('name')->get();
+        $dispositions = Dispositions::get();
+        return view('report/fileexport', compact('campaigns', 'dispositions')); 
+    }
+
+    public function fileexport_submit(Request $request)
+    {
+        $datepicker_from = $request->input('datepicker_from');
+        $datepicker_to = $request->input('datepicker_to');
+        $campaign = $request->input('campaign');
+        $disposition = $request->input('disposition');
+        $campaigns = Campaigns::select('name')->where('instanceid', Auth::user()->instanceid)
+                        ->groupby('name')->get();
+        $dispositions = Dispositions::get();
+        $leads = Leads::select('leads.id', 'leads.cellno', 'leads.callsid', 'leads.disposition', 'campaigns.name as campaignname')
+                          ->join('campaigns', 'leads.campaignid', '=', 'campaigns.id')
+                          ->where('leads.instanceid', Auth::user()->instanceid)
+                          ->where('campaigns.name', $campaign)
+                          ->where('leads.updated_at', '>=' , $datepicker_from . ' 00:00:00')
+                          ->where('leads.updated_at', '<=' , $datepicker_to . ' 23:59:59')
+                          ->whereNotNull('leads.callsid')
+                          ->whereNotNull('leads.callid')
+                          ->whereNotNull('leads.disposition');
+        if($disposition != "All"){
+            $leads = $leads->where('leads.disposition', $disposition);
+        }
+        
+        $filename = 'export-data.csv';
+    
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"$filename\"",
+            'Pragma' => 'no-cache',
+            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires' => '0',
+        ];
+
+        return response()->stream(function () {
+            $handle = fopen('php://output', 'w');
+        
+            fputcsv($handle, [
+                'Lead ID',
+                'Cell Number',
+                'Call SID',
+                'Disposition',
+                'Campaign Name'
+            ]);
+
+        // Fetch and process data in chunks
+        $leads->chunk(5000, function ($leads_export) use ($handle) {
+            foreach ($leads_export as $lead) {
+         // Extract data from each employee.
+                $data = [
+                    $lead->id,
+                    $lead->cellno,
+                    $lead->callsid,
+                    $lead->disposition,
+                    $lead->campaignname,
+                ];
+
+         // Write data to a CSV file.
+                fputcsv($handle, $data);
+            }
+        });
+
+        // Close CSV file handle
+        fclose($handle);
+    }, 200, $headers);
     }
 
     public function dialstats_submit(Request $request)

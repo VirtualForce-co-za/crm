@@ -76,7 +76,7 @@
                                                     @endforeach
                                                 
                                             </table>
-                                            <div>{{ $qualifiedleads->links() }}</div>     
+                                            <div>{{ $qualifiedleads->appends(request()->except('page'))->links() }}</div>     
                 <x-section-border />
             
         </div>
